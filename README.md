@@ -1,16 +1,38 @@
-# React + Vite
+React Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Overview
+React Task Manager is a task management web application built with **React**. It allows users to add, edit, and remove tasks with a clean and responsive user interface. Task data is persisted in **localStorage**, ensuring tasks remain available after page reloads. The app also includes a basic login simulation and profile sidebar navigation.
 
-Currently, two official plugins are available:
+Features
+ Add Tasks: Quickly add new tasks with an input form.
+ Edit Tasks: Update task text inline with an edit form.
+ Remove Tasks: Delete tasks with a single click.
+ Login Simulation: Basic login functionality for a personalized experience.
+ Profile Sidebar: Navigate between Tasks and Settings pages.
+ LocalStorage Persistence: Task data is saved locally for persistence.
+ Responsive Design: Compatible with desktop and mobile devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Technologies Used
+ React (functional components, hooks: useState, useEffect)
+ React Router DOM (routing and modal routes)
+ JavaScript (ES6+)
+ CSS (flexbox, responsive layouts)
+ localStorage (task persistence)
 
-## React Compiler
+Installation & Usage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+bash
+git clone <repository-url>
+cd react-task-manager
+npm install
+npm start
 
-## Expanding the ESLint configuration
+Then open your browser at http://localhost:3000.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Future Improvements
+
+Integrate a PostgreSQL backend for multi-user storage.
+Implement real authentication with JWT tokens.
+Add drag-and-drop task reordering.
+Deploy to Vercel or Netlify for a live demo.
+
