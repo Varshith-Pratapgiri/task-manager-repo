@@ -107,6 +107,7 @@ ul, ol {
   background-color: black;
   color: white;
   transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
 .profile-button:hover {
@@ -165,6 +166,9 @@ ul, ol {
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 20px auto;
 }
 
 .tasks-item {
@@ -172,21 +176,6 @@ ul, ol {
   /* justify-content: space-between; */
   align-items: center;
   gap: 8px;
-
-
-.task-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-  }
-
-.edit-form {
-    display: flex;
-    gap: 6px;
-  }
-
-
   padding: 1px 15px;
   background-color: #151b2c;
   color: #e5e7eb;
@@ -197,9 +186,77 @@ ul, ol {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+.task-actions button {
+  padding: 6px 6px;
+  border-radius: 5px;
+  border: 1px solid #1f2937;
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.task-actions button:hover {
+  background-color: brown;
+  transform: translateY(-2px) scale(1.1);
+}
+
+.task-actions input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+
+  accent-color: green;
+
+  border-radius: 5px;
+  border: 1px solid #1f2937;
+}
+
+.edit-form {
+    display: flex;
+    gap: 6px;
+  }
+
 .tasks-item:hover {
   background-color: #1a2135;
   transform: translateY(-2px);
+}
+
+.tasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 16px auto 12px;
+}
+
+.task-message {
+  margin: 4px 0 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.filter-input {
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 320px;
+
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  background-color: #0b0f14;
+  color: #e5e7eb;
+
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login-form {
