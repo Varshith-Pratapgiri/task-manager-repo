@@ -8,27 +8,28 @@ export default function App() {
   const isFirstRender = useRef(true)
 
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem("tasks");
-  return savedTasks ? JSON.parse(savedTasks) : [];
+    try {
+      const savedTasks = localStorage.getItem("tasks");
+      return savedTasks? JSON.parse(savedTasks): [];
+    }
+    catch (err) {
+      console.error("Error loading tasks", err);
+      return [];
+    }
   });
-  
-
-  const addTask = (text) => {
-    if (!text.trim()) return;
-
-    setTasks(prev => [
-      ...prev,
-      { id: Date.now(), text: text.trim() }
-    ]);
-  };
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks])
+    const timeoutId = setTimeout(() => {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, 500);
+  return () => {
+    clearTimeout(timeoutId);
+  }
+}, [tasks]);
 
 
   const removeTask = (id) => {

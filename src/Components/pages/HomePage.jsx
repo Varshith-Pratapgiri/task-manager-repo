@@ -1,41 +1,41 @@
 import { useEffect, useState } from "react";
 import "../../styles.css";
-import Tasks from "../sidebar/Tasks";
 
 export default function HomePage({tasks, setTasks}) {
 
   const [inp, setInp] = useState("");
-  const [msg, setMsg] = useState("");
-  const [showMsg, setShowMsg] = useState(false)
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    if (!showMsg || !msg) return; 
+    if (!message) return; 
 
     const timer = setTimeout(() => {
-      setShowMsg(false), 
-      setMsg("")
+      setMessage(null);
     }, 1500);
     return () => clearTimeout(timer);
-  }, [showMsg, msg]);
+  }, [message]);
 
   const addTask = () => {
-    if (inp.trim() === "") return
-    if (tasks.some(task => task.text.toLowerCase() === inp.trim().toLowerCase())) {
-      setShowMsg(true);
-      setMsg("Task already added!")
+    const trimmedInp = inp.trim();
+
+    if (trimmedInp === "") return;
+
+    const isDuplicate = tasks.some(task => task.text?.toLowerCase() === trimmedInp.toLowerCase());
+
+    if (isDuplicate) {
+      setMessage("Task already added!");
       return;
     }
     const newTask = {
-      id : Date.now(),
-      text : inp.trim(),
-      isCompleted : false
-    };
-    setTasks(prevTask => [...prevTask, newTask]);
-    setInp("")
-    setShowMsg(true)
-    setMsg("task added successfully!")
-  };
-  
+      id: Date.now(),
+      text: trimmedInp,
+      isCompleted: false
+    }
+    setTasks(prevTasks => [...prevTasks, newTask]);
+    setInp("");
+    setMessage("task added successfully");
+
+  }
 
     return(
         <div className="home-page">
@@ -47,13 +47,13 @@ export default function HomePage({tasks, setTasks}) {
       value={inp}
       onChange={(e) => setInp(e.target.value)}
       onKeyDown={(e) => {
-        if (e.key == "Enter") {
+        if (e.key === "Enter") {
           addTask();
         }
       }}
       placeholder="enter..."/>
       <button onClick={addTask}>submit</button>
-       {showMsg && <p>{msg}</p>}
+       {message && <p>{message}</p>}
         </div>
     );
 }

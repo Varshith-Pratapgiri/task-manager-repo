@@ -1,5 +1,5 @@
 import "../../styles.css";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 export default function Tasks({ tasks, setTasks, removeTask }) {
 
@@ -17,10 +17,10 @@ export default function Tasks({ tasks, setTasks, removeTask }) {
         return () => clearTimeout(timer);
     }, [showMsg]);
 
-    const startEdit = (task) => {
+    const startEdit = useCallback((task) => {
         setEditTaskId(task.id);
-        setEditInp(task.text);
-    };
+        setEditInp(task.text || "");
+    }, []);
 
     const onClickEditSubmit = (e) => {
         e.preventDefault();
@@ -36,7 +36,7 @@ export default function Tasks({ tasks, setTasks, removeTask }) {
         setEditInp("");
     };
 
-    const toggleTaskComplete = (id) => {
+    const toggleTaskComplete = useCallback((id) => {
         setTasks(prevTasks => 
             prevTasks.map(task => 
                 task.id === id
@@ -44,12 +44,12 @@ export default function Tasks({ tasks, setTasks, removeTask }) {
                 : task
             )
         );
-    }
+    },[setTasks]);
 
     const filteredTasks = useMemo(() => {
         if (!tasks) return [];
         return tasks.filter(task => 
-            task.text.toLowerCase().includes(search.toLowerCase())
+            task.text?.toLowerCase().includes(search.toLowerCase())
         )
     }, [tasks, search]);
 
@@ -75,10 +75,10 @@ export default function Tasks({ tasks, setTasks, removeTask }) {
             {showMsg && <p className="task-message">Task removed</p>}
 
             <div className="tasks">
-                {filteredTasks.length === 0 && <p>No matching tasks</p>}
+                {filteredTasks.length === 0 && <p>No matching tasks for {search}</p>}
                 {filteredTasks.map((task) => (
                 <div key={task.id} className="tasks-item">
-                    <p>{task.text}</p>
+                    <p>{task.text || ""}</p>
 
                     <div className="task-actions">
                         {editTaskId !== task.id && (
